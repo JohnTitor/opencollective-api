@@ -12,7 +12,7 @@ import * as utils from '../test/utils';
 const application = utils.data('application');
 const userData = utils.data('user1');
 
-describe('images.routes.test.js', () => {
+describe('images.routes.test.js', function() {
   let user;
   this.timeout(10000);
 
