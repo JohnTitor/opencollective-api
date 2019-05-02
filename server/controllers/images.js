@@ -1,7 +1,7 @@
 import path from 'path';
 import uuidv1 from 'uuid/v1';
 
-import s3 from '../lib/awsSdk';
+import S3 from '../lib/awsSdk';
 import errors from '../lib/errors';
 
 // Use a 2 minutes timeout for image upload requests as the default 25 seconds
@@ -47,16 +47,8 @@ export default function uploadImage(req, res, next) {
 
   req.setTimeout(IMAGE_UPLOAD_TIMEOUT);
 
-  s3.client.upload(
-    {
-      ContentLength: file.size,
-      ContentType: file.mimetype,
-      ACL: 'public-read',
-      Key: filename,
-      Body: file,
-    },
-    (_err, _data) => {
-      res.send({ status: '200', url: 'https://neet.club' });
-    },
-  );
+  const s3 = new S3();
+  s3.uploadImage(file, filename).then(data => {
+    res.send({ status: '200', url: data.Location });
+  });
 }
