@@ -55,8 +55,8 @@ export default function uploadImage(req, res, next) {
       Key: filename,
       Body: file,
     },
-    (err, data) => {
-      if (err === null) res.send({ status: '200', url: data.Location });
+    (_, data) => {
+      res.send({ status: '200', url: data.Location });
     },
   );
 }
