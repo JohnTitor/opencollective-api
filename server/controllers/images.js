@@ -48,5 +48,7 @@ export default function uploadImage(req, res, next) {
   req.setTimeout(IMAGE_UPLOAD_TIMEOUT);
 
   const s3 = new S3();
-  s3.uploadImage(file, filename, res);
+  s3.uploadImage(file, filename).then(data => {
+    res.send({ status: '200', url: data.Location });
+  });
 }

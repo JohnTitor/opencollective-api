@@ -14,7 +14,7 @@ const userData = utils.data('user1');
 
 describe('images.routes.test.js', function() {
   let user;
-  this.timeout(10000);
+  this.timeout(20000);
 
   beforeEach(() => utils.resetTestDB());
 
@@ -57,7 +57,6 @@ describe('images.routes.test.js', function() {
       .post(`/images/?api_key=${application.api_key}`)
       .attach('file', 'test/mocks/images/camera.png')
       .expect(200)
-      .then(done)
-      .finally(done);
+      .end(done);
   });
 });
