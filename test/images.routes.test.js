@@ -41,7 +41,7 @@ describe('images.routes.test.js', function() {
         expect(image).to.equal(originalImage);
         done();
       })
-      .catch(done);
+      .finally(done);
   });
 
   it('should throw an error if no file field is sent', done => {
@@ -57,6 +57,7 @@ describe('images.routes.test.js', function() {
       .post(`/images/?api_key=${application.api_key}`)
       .attach('file', 'test/mocks/images/camera.png')
       .expect(200)
-      .end(done);
+      .then(done)
+      .finally(done);
   });
 });
