@@ -28,7 +28,7 @@ describe('images.routes.test.js', function() {
     const originalImage = fs.readFileSync(path.join(__dirname, 'mocks/images/camera.png'), {
       encoding: 'utf8',
     });
-    request(app)
+    return request(app)
       .post(`/images/?api_key=${application.api_key}`)
       .attach('file', 'test/mocks/images/camera.png')
       .set('Authorization', `Bearer ${user.jwt()}`)
@@ -45,7 +45,7 @@ describe('images.routes.test.js', function() {
   });
 
   it('should throw an error if no file field is sent', done => {
-    request(app)
+    return request(app)
       .post(`/images/?api_key=${application.api_key}`)
       .set('Authorization', `Bearer ${user.jwt()}`)
       .expect(400)
@@ -53,7 +53,7 @@ describe('images.routes.test.js', function() {
   });
 
   it('should upload if the user is not logged in', done => {
-    request(app)
+    return request(app)
       .post(`/images/?api_key=${application.api_key}`)
       .attach('file', 'test/mocks/images/camera.png')
       .expect(200)
