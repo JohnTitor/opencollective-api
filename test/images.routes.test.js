@@ -12,9 +12,8 @@ import * as utils from '../test/utils';
 const application = utils.data('application');
 const userData = utils.data('user1');
 
-describe('images.routes.test.js', function() {
+describe('images.routes.test.js', () => {
   let user;
-  this.timeout(10000);
 
   beforeEach(() => utils.resetTestDB());
 
@@ -41,7 +40,7 @@ describe('images.routes.test.js', function() {
         expect(image).to.equal(originalImage);
         done();
       })
-      .finally(done);
+      .catch(done);
   });
 
   it('should throw an error if no file field is sent', done => {

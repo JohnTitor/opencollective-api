@@ -12,7 +12,7 @@ if (config.aws.s3.key) {
 }
 
 export default class S3 {
-  uploadImage(file, fileName) {
+  uploadImage(file, fileName, res) {
     const params = {
       Body: file,
       Bucket: config.aws.s3.bucket,
@@ -23,7 +23,9 @@ export default class S3 {
     };
     const s3 = new AWS.S3();
     return s3.putObject(params, (err, data) => {
-      res.send({ status: '200', url: data.Location });
+      if (err === null) {
+        res.send({ status: '200', url: data.Location });
+      }
     });
   }
 }
