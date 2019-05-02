@@ -14,6 +14,7 @@ const userData = utils.data('user1');
 
 describe('images.routes.test.js', () => {
   let user;
+  this.timeout(10000);
 
   beforeEach(() => utils.resetTestDB());
 
@@ -24,7 +25,6 @@ describe('images.routes.test.js', () => {
   beforeEach(() => models.User.create(userData).tap(u => (user = u)));
 
   it('should upload an image to S3', done => {
-    this.timeout(10000);
     const originalImage = fs.readFileSync(path.join(__dirname, 'mocks/images/camera.png'), {
       encoding: 'utf8',
     });
@@ -53,7 +53,6 @@ describe('images.routes.test.js', () => {
   });
 
   it('should upload if the user is not logged in', done => {
-    this.timeout(10000);
     request(app)
       .post(`/images/?api_key=${application.api_key}`)
       .attach('file', 'test/mocks/images/camera.png')
