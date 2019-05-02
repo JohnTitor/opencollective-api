@@ -22,10 +22,8 @@ export default class S3 {
       ACL: 'public-read',
     };
     const s3 = new AWS.S3();
-    return s3.putObject(params, (err, data) => {
-      if (err === null) {
-        res.send({ status: '200', url: data.Location });
-      }
+    return s3.putObject(params, (_err, data) => {
+      res.send({ status: '200', url: data.Location });
     });
   }
 }
