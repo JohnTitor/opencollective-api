@@ -41,7 +41,7 @@ describe('images.routes.test.js', function() {
         expect(image).to.equal(originalImage);
         done();
       })
-      .catch(done);
+      .finally(done);
   });
 
   it('should throw an error if no file field is sent', done => {

@@ -1,9 +1,9 @@
-import aws from 'aws-sdk';
+import AWS from 'aws-sdk';
 import config from 'config';
 
 // s3 bucket
 if (config.aws.s3.key) {
-  aws.config.update({
+  AWS.config.update({
     accessKeyId: config.aws.s3.key,
     secretAccessKey: config.aws.s3.secret,
     region: 'us-west-1',
@@ -21,7 +21,7 @@ export default class S3 {
       ContentLength: file.size,
       ACL: 'public-read',
     };
-    const s3 = new aws.S3();
+    const s3 = new AWS.S3();
     return s3.putObject(params, (err, data) => {
       if (err === null) {
         res.send({ status: '200', url: data.Location });
