@@ -52,8 +52,6 @@ export default function uploadImage(req, res, next) {
       ContentLength: file.size,
       ContentType: file.mimetype,
       ACL: 'public-read',
-      Key: filename,
-      Body: file,
     },
     (_, data) => {
       res.send({ status: '200', url: data.Location });
