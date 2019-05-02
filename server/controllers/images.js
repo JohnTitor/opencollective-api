@@ -35,9 +35,9 @@ export default function uploadImage(req, res, next) {
     );
   }
 
-  if (s3 === null) {
+  /* if (s3 === null) {
     return next(new errors.ServerError('AWS-SDK client not initialized'));
-  }
+  } */
 
   /**
    * We will replace the name to avoid collisions
